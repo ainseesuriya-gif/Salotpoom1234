@@ -1,22 +1,704 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salot123</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Salot123 | Modern Demo</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+font-family:Arial,sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 50% -10%,#6336c9 0,#241344 28%,transparent 55%),
+linear-gradient(135deg,#07070d,#11101d 60%,#09090f);
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background-image:
+radial-gradient(#fff 1px,transparent 1px);
+background-size:70px 70px;
+opacity:.035;
+}
+
+/* NAV */
+.nav{
+position:sticky;
+top:0;
+z-index:100;
+height:72px;
+padding:0 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:rgba(7,7,14,.75);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+font-size:24px;
+font-weight:900;
+letter-spacing:.5px;
+}
+
+.logo span{
+color:#a78bfa;
+text-shadow:0 0 20px #8b5cf6;
+}
+
+.links{
+display:flex;
+gap:6px;
+align-items:center;
+}
+
+.links a{
+color:#ddd;
+text-decoration:none;
+padding:10px 15px;
+border-radius:12px;
+transition:.25s;
+}
+
+.links a:hover{
+background:rgba(139,92,246,.16);
+color:#fff;
+}
+
+.play-small{
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+box-shadow:0 0 22px rgba(124,58,237,.3);
+color:#fff!important;
+}
+
+.menu{
+display:none;
+border:0;
+color:#fff;
+background:rgba(255,255,255,.08);
+font-size:25px;
+width:45px;
+height:45px;
+border-radius:12px;
+}
+
+/* HERO */
+.hero{
+min-height:72vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:70px 20px 40px;
+}
+
+.hero-inner{
+max-width:850px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 15px;
+border:1px solid rgba(167,139,250,.35);
+background:rgba(139,92,246,.1);
+border-radius:30px;
+color:#c4b5fd;
+margin-bottom:20px;
+font-size:14px;
+}
+
+.hero h1{
+font-size:clamp(45px,10vw,90px);
+line-height:.95;
+font-weight:900;
+letter-spacing:-3px;
+text-shadow:0 0 35px rgba(139,92,246,.6);
+}
+
+.hero h1 span{
+color:#a78bfa;
+}
+
+.hero p{
+max-width:650px;
+margin:22px auto 30px;
+color:#aeb5c8;
+font-size:18px;
+line-height:1.7;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:15px 25px;
+border-radius:15px;
+text-decoration:none;
+font-weight:800;
+transition:.25s;
+}
+
+.btn-main{
+color:#fff;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+box-shadow:0 10px 35px rgba(99,102,241,.3);
+}
+
+.btn-main:hover{
+transform:translateY(-3px) scale(1.02);
+}
+
+.btn-dark{
+color:#fff;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.1);
+}
+
+/* CARDS */
+.section{
+width:min(1050px,92%);
+margin:0 auto 70px;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:25px;
+}
+
+.section-title h2{
+font-size:32px;
+}
+
+.section-title p{
+color:#858da2;
+margin-top:8px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.card{
+padding:25px;
+border-radius:22px;
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.08);
+transition:.25s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:rgba(167,139,250,.35);
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.icon{
+font-size:38px;
+margin-bottom:14px;
+}
+
+.card h3{
+margin-bottom:8px;
+}
+
+.card p{
+color:#949db1;
+line-height:1.6;
+}
+
+/* GAME */
+.game{
+width:min(720px,92%);
+margin:0 auto 80px;
+padding:25px;
+border-radius:28px;
+background:rgba(8,8,18,.9);
+border:1px solid rgba(167,139,250,.35);
+box-shadow:
+0 25px 80px rgba(0,0,0,.35),
+0 0 45px rgba(124,58,237,.12);
+}
+
+.balance{
+text-align:center;
+font-size:19px;
+margin-bottom:20px;
+}
+
+.balance b{
+color:#facc15;
+}
+
+.reels{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+}
+
+.reel{
+height:150px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:70px;
+border-radius:20px;
+background:linear-gradient(145deg,#fff,#dbe4ff);
+box-shadow:
+inset 0 0 25px rgba(0,0,0,.18),
+0 8px 25px rgba(0,0,0,.25);
+}
+
+.spin-animation{
+animation:shake .08s infinite;
+}
+
+@keyframes shake{
+0%{transform:translateY(-4px)}
+50%{transform:translateY(4px)}
+100%{transform:translateY(-4px)}
+}
+
+.message{
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:800;
+font-size:19px;
+margin:15px 0;
+}
+
+.controls{
+display:flex;
+gap:10px;
+}
+
+button{
+font-family:inherit;
+cursor:pointer;
+border:0;
+}
+
+.spin{
+flex:1;
+padding:16px;
+border-radius:15px;
+font-size:18px;
+font-weight:900;
+color:#fff;
+background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+box-shadow:0 8px 25px rgba(99,102,241,.25);
+}
+
+.reset{
+padding:16px 22px;
+border-radius:15px;
+color:#fff;
+background:#27273a;
+}
+
+button:disabled{
+opacity:.5;
+cursor:not-allowed;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:30px;
+color:#646c80;
+border-top:1px solid rgba(255,255,255,.06);
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+.nav{
+height:auto;
+min-height:70px;
+padding:12px 5%;
+flex-wrap:wrap;
+}
+
+.menu{
+display:block;
+}
+
+.links{
+display:none;
+width:100%;
+flex-direction:column;
+padding:10px 0 4px;
+}
+
+.links.show{
+display:flex;
+}
+
+.links a{
+width:100%;
+text-align:center;
+}
+
+.hero{
+min-height:65vh;
+padding-top:50px;
+}
+
+.hero h1{
+letter-spacing:-2px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.game{
+padding:15px;
+}
+
+.reel{
+height:105px;
+font-size:48px;
+}
+
+.controls{
+flex-direction:column;
+}
+
+.reset{
+width:100%;
+}
+}
+</style>
 </head>
+
 <body>
-  <h1>🎰 Salot123</h1>
-  <p>GitHub Pages ทำงานแล้ว!</p>
 
-  <button onclick="openDemo()">
-    เปิดเว็บไซต์
-  </button>
+<!-- NAV -->
+<nav class="nav">
 
-  <script>
-    function openDemo() {
-      window.open("https://example.com", "_blank");
-    }
-  </script>
+<div class="logo">
+🎰 <span>Salot123</span>
+</div>
+
+<button class="menu" onclick="toggleMenu()">☰</button>
+
+<div class="links" id="links">
+<a href="#home">🏠 หน้าแรก</a>
+<a href="#features">✨ ฟีเจอร์</a>
+<a href="#game">🎮 เกมเดโม</a>
+<a href="#about">ℹ️ เกี่ยวกับ</a>
+<a href="#game" class="play-small">▶ เข้าเล่น</a>
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+<div class="hero-inner">
+
+<div class="badge">
+● DEMO MODE • แต้มสมมติ
+</div>
+
+<h1>
+SALOT<span>123</span>
+</h1>
+
+<p>
+เว็บไซต์เกมเดโมดีไซน์สมัยใหม่
+พร้อมเอฟเฟกต์ลื่นไหลและรองรับโทรศัพท์
+เล่นด้วยแต้มสมมติเท่านั้น
+</p>
+
+<div class="hero-buttons">
+
+<a href="#game" class="btn btn-main">
+🎰 เข้าเล่นเดโม
+</a>
+
+<a href="#features" class="btn btn-dark">
+✨ ดูฟีเจอร์
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="section" id="features">
+
+<div class="section-title">
+<h2>✨ ฟีเจอร์</h2>
+<p>ออกแบบมาให้ใช้งานง่ายบนมือถือ</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="icon">🎮</div>
+<h3>เกมเดโม</h3>
+<p>ระบบสุ่มสัญลักษณ์สำหรับทดลองเล่นด้วยแต้มสมมติ</p>
+</div>
+
+<div class="card">
+<div class="icon">📱</div>
+<h3>Mobile UI</h3>
+<p>รองรับหน้าจอโทรศัพท์และแท็บเล็ต</p>
+</div>
+
+<div class="card">
+<div class="icon">⚡</div>
+<h3>เอฟเฟกต์</h3>
+<p>มีแอนิเมชันขณะหมุนและเอฟเฟกต์ปุ่ม</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GAME -->
+<section id="game">
+
+<div class="section-title">
+<h2>🎰 เกมเดโม</h2>
+<p>ใช้แต้มสมมติ ไม่มีเงินจริง</p>
+</div>
+
+<div class="game">
+
+<div class="balance">
+🪙 แต้มทดลอง:
+<b id="coins">1000</b>
+</div>
+
+<div class="reels">
+
+<div class="reel" id="r1">🍒</div>
+<div class="reel" id="r2">⭐</div>
+<div class="reel" id="r3">💎</div>
+
+</div>
+
+<div class="message" id="message">
+กด “หมุน” เพื่อเริ่ม
+</div>
+
+<div class="controls">
+
+<button class="spin" id="spinBtn" onclick="spin()">
+🎰 หมุน
+</button>
+
+<button class="reset" onclick="resetGame()">
+รีเซ็ต
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="section" id="about">
+
+<div class="section-title">
+<h2>ℹ️ เกี่ยวกับ</h2>
+<p>Salot123 Demo</p>
+</div>
+
+<div class="card" style="text-align:center">
+<p>
+เว็บไซต์นี้เป็นเกมจำลองสำหรับความบันเทิง
+ใช้แต้มสมมติภายในเว็บไซต์เท่านั้น
+ไม่มีระบบฝากเงิน ถอนเงิน หรือเงินจริง
+</p>
+</div>
+
+</section>
+
+
+<footer>
+© 2026 Salot123 • Demo Game
+</footer>
+
+
+<script>
+
+const symbols=[
+"🍒",
+"⭐",
+"💎",
+"7️⃣",
+"🍋",
+"🔔"
+];
+
+let coins=1000;
+let spinning=false;
+
+const coinsEl=document.getElementById("coins");
+const message=document.getElementById("message");
+const spinBtn=document.getElementById("spinBtn");
+
+function randomSymbol(){
+return symbols[
+Math.floor(Math.random()*symbols.length)
+];
+}
+
+function updateCoins(){
+coinsEl.textContent=coins;
+}
+
+function spin(){
+
+if(spinning)return;
+
+if(coins<10){
+message.textContent="🪙 แต้มทดลองไม่พอ";
+return;
+}
+
+spinning=true;
+spinBtn.disabled=true;
+
+coins-=10;
+updateCoins();
+
+message.textContent="กำลังหมุน...";
+
+const reels=[
+document.getElementById("r1"),
+document.getElementById("r2"),
+document.getElementById("r3")
+];
+
+reels.forEach(r=>{
+r.classList.add("spin-animation");
+});
+
+let count=0;
+
+const timer=setInterval(()=>{
+
+reels.forEach(r=>{
+r.textContent=randomSymbol();
+});
+
+count++;
+
+if(count>=15){
+
+clearInterval(timer);
+
+const result=[
+randomSymbol(),
+randomSymbol(),
+randomSymbol()
+];
+
+reels.forEach((r,i)=>{
+r.textContent=result[i];
+r.classList.remove("spin-animation");
+});
+
+checkWin(result);
+
+spinning=false;
+spinBtn.disabled=false;
+
+}
+
+},80);
+
+}
+
+function checkWin(result){
+
+const [a,b,c]=result;
+
+if(a===b && b===c){
+
+let reward=50;
+
+if(a==="💎")reward=500;
+else if(a==="7️⃣")reward=300;
+else if(a==="⭐")reward=200;
+else if(a==="🍒")reward=100;
+
+coins+=reward;
+
+message.textContent=
+"🎉 โบนัส +"+reward+" แต้มทดลอง!";
+}
+else{
+
+message.textContent=
+"ยังไม่ตรงกัน ลองใหม่ได้เลย 🎰";
+
+}
+
+updateCoins();
+
+}
+
+function resetGame(){
+
+coins=1000;
+
+document.getElementById("r1").textContent="🍒";
+document.getElementById("r2").textContent="⭐";
+document.getElementById("r3").textContent="💎";
+
+message.textContent="กด “หมุน” เพื่อเริ่ม";
+
+updateCoins();
+
+}
+
+function toggleMenu(){
+
+document
+.getElementById("links")
+.classList.toggle("show");
+
+}
+
+</script>
+
 </body>
 </html>
